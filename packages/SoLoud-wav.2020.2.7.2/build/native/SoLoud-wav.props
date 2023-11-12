@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <ItemGroup>
+    <SoLoud-wavLibs Include="$(MSBuildThisFileDirectory)\lib\$(Platform)\$(Configuration)\*.lib" />
+    <SoLoud-wavIncl Include="$(MSBuildThisFileDirectory)include" />
+  </ItemGroup>
+  <PropertyGroup>
+    <!-- Expland the items to a property -->
+    <SoLoud-wavLibraries>@(SoLoud-wavLibs)</SoLoud-wavLibraries>
+    <SoLoud-wavIncludes>@(SoLoud-wavIncl)</SoLoud-wavIncludes>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SoLoud-wavIncludes);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WITH_MINIAUDIO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>$(SoLoud-wavLibraries);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+</Project>
